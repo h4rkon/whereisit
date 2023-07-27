@@ -13,13 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 import SwiftUI
 
-@main
-struct whereisitApp: App {
-    var body: some Scene {
-        WindowGroup {
-            GameStageContainerView()
-        }
+struct GameStageContainerView: View {
+    @State private var currentStage: Int = 1
+    
+    var body: some View {
+        GameView().environmentObject(GameState())
+            .preferredColorScheme(.light)
     }
 }
