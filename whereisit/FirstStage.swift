@@ -17,7 +17,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-class GameState: ObservableObject {
+class FirstStage: ObservableObject {
     
     static let dogSize = CGFloat(200)
     static let frameSize = CGFloat(300)
@@ -55,14 +55,14 @@ class GameState: ObservableObject {
         let screenHeight = UIScreen.main.bounds.height
 
         // Randomly generate x and y positions for the dog within the screen boundaries
-        var randomDogX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - GameState.dogSize))
-        var randomDogY = CGFloat.random(in: 0...(screenHeight - GameState.dogSize))
+        var randomDogX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - FirstStage.dogSize))
+        var randomDogY = CGFloat.random(in: 0...(screenHeight - FirstStage.dogSize))
 
         // Check if the randomly generated position overlaps with the frame
-        while CGRect(x: randomDogX, y: randomDogY, width: GameState.dogSize, height: GameState.dogSize).intersects(CGRect(origin: framePosition, size: CGSize(width: GameState.frameSize, height: GameState.frameSize))) {
+        while CGRect(x: randomDogX, y: randomDogY, width: FirstStage.dogSize, height: FirstStage.dogSize).intersects(CGRect(origin: framePosition, size: CGSize(width: FirstStage.frameSize, height: FirstStage.frameSize))) {
             // If it overlaps, generate new random positions until a valid position is found
-            randomDogX = CGFloat.random(in: 0...(screenWidth - GameState.dogSize))
-            randomDogY = CGFloat.random(in: 0...(screenHeight - GameState.dogSize))
+            randomDogX = CGFloat.random(in: 0...(screenWidth - FirstStage.dogSize))
+            randomDogY = CGFloat.random(in: 0...(screenHeight - FirstStage.dogSize))
         }
 
         // Set the dog position to the valid random position

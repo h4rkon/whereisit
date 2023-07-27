@@ -15,8 +15,8 @@
 
 import SwiftUI
 
-struct GameView: View {
-    @EnvironmentObject var gameState: GameState
+struct FirstStageView: View {
+    @EnvironmentObject var gameState: FirstStage
     @State private var dogImage = UIImage(named: "dog")
     @State private var frameImage = UIImage(named: "frame")
     @State private var showConfetti: Bool = false
@@ -39,12 +39,12 @@ struct GameView: View {
                 
                 Image(uiImage: frameImage)
                     .resizable()
-                    .frame(width: GameState.frameSize, height: GameState.frameSize)
+                    .frame(width: FirstStage.frameSize, height: FirstStage.frameSize)
                     .position(gameState.framePosition)
                 
                 Image(uiImage: dogImage)
                     .resizable()
-                    .frame(width: GameState.dogSize, height: GameState.dogSize)
+                    .frame(width: FirstStage.dogSize, height: FirstStage.dogSize)
                     .position(gameState.dogPosition)
                 
                 if (gameState.isWinning()) {
@@ -81,8 +81,8 @@ struct GameView: View {
     }
     
     func checkForWinningCondition(finalDogPosition: CGPoint) -> Bool {
-        let dogSize: CGFloat = GameState.dogSize
-        let frameSize: CGFloat = GameState.frameSize
+        let dogSize: CGFloat = FirstStage.dogSize
+        let frameSize: CGFloat = FirstStage.frameSize
         let frameTopLeft = gameState.framePosition
         
         let dogCenter = CGPoint(x: finalDogPosition.x + dogSize/2, y: finalDogPosition.y + dogSize/2)
