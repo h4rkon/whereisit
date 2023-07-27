@@ -17,7 +17,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-class SecondStage: ObservableObject {
+class SecondStage: AnyGameStage {
     
     static let ballSize = CGFloat(200)
     static let frameSize = CGFloat(300)
@@ -31,8 +31,9 @@ class SecondStage: ObservableObject {
     
     @Published var audioPlayer: AVAudioPlayer?
 
-
-    init() {
+    init(name: String, nextState: (AnyGameStage)?) {
+        super.init(name: name)
+        self.nextState = nextState
         updateFramePosition()
         generateRandomBallPosition()
     }
@@ -71,7 +72,18 @@ class SecondStage: ObservableObject {
         return winning
     }
     
-    func resetLevel() {
+    override func checkWinningCondition(movedObjectFinalPosition: CGPoint) -> Bool {
+        let ballSize: CGFloat = FirstStage.dogSize
+        let frameSize: CGFloat = FirstStage.frameSize
+        let frameTopLeft = framePosition
+        
+        let ballCenter = CGPoint(x: movedObjectFinalPosition.x + ballSize/2, y: movedObjectFinalPosition.y + ballSize/2)
+        let frame = CGRect(origin: frameTopLeft, size: CGSize(width: frameSize, height: frameSize))
+        
+        return frame.contains(ballCenter)
+    }
+    
+    override func resetGameState() {
         ballPosition = CGPoint(x: originalBallPosition.x, y: originalBallPosition.y)
         playSounds()
     }
@@ -80,8 +92,13 @@ class SecondStage: ObservableObject {
         level += 1
         generateRandomBallPosition()
         winning = false
-        let _ = print("Level \(level)")
-        playSounds()
+        if (level >= 3) {
+            let _ = print("Stage \(self.name) was called accomplished=true")
+            setAccomplished(accomplished: true)
+        }
+        else {
+            playSounds()
+        }
     }
     
     func playSounds() {
@@ -103,5 +120,17 @@ class SecondStage: ObservableObject {
                 let _ = print("Error playing sound: \(error.localizedDescription)")
             }
         }
+    }
+    
+    override func nextStage() -> (AnyGameStage)? {
+        if (isAccomplished()) {
+            level = 1
+            return nextState
+        }
+        return nil
+    }
+    
+    override func getView() -> AnyView {
+        AnyView(SecondStageView(gameState: self as SecondStage))
     }
 }

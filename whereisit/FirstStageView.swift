@@ -16,7 +16,8 @@
 import SwiftUI
 
 struct FirstStageView: View {
-    @EnvironmentObject var gameState: FirstStage
+    @ObservedObject var gameState: FirstStage
+    
     @State private var dogImage = UIImage(named: "dog")
     @State private var frameImage = UIImage(named: "frame")
     @State private var showConfetti: Bool = false
@@ -68,8 +69,8 @@ struct FirstStageView: View {
                     gameState.dogPosition = value.location
                 }
                 .onEnded { value in
-                    if (checkForWinningCondition(finalDogPosition: value.location) == false) {
-                        gameState.resetLevel()
+                    if (gameState.checkWinningCondition(movedObjectFinalPosition: value.location) == false) {
+                        gameState.resetGameState()
                         let _ = print("Try harder")
                     }
                     else {
@@ -78,16 +79,5 @@ struct FirstStageView: View {
                     }
                 }
         )
-    }
-    
-    func checkForWinningCondition(finalDogPosition: CGPoint) -> Bool {
-        let dogSize: CGFloat = FirstStage.dogSize
-        let frameSize: CGFloat = FirstStage.frameSize
-        let frameTopLeft = gameState.framePosition
-        
-        let dogCenter = CGPoint(x: finalDogPosition.x + dogSize/2, y: finalDogPosition.y + dogSize/2)
-        let frame = CGRect(origin: frameTopLeft, size: CGSize(width: frameSize, height: frameSize))
-        
-        return frame.contains(dogCenter)
     }
 }

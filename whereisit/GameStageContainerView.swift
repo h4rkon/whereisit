@@ -16,11 +16,46 @@
 
 import SwiftUI
 
-struct GameStageContainerView: View {
-    @State private var currentStage: Int = 1
+class GameStageContainer: ObservableObject {
+    @Published var currentStage: AnyGameStage
+    @Published var currentStageAccomplished: Bool
     
-    var body: some View {
-        SecondStageView().environmentObject(SecondStage())
-            .preferredColorScheme(.light)
+    init() {
+        let secondStage = SecondStage(name: "Second", nextState: nil)
+        let firstStage = FirstStage(name: "First", nextState: secondStage)
+        secondStage.nextState = firstStage
+        currentStage = firstStage
+        currentStageAccomplished = false
     }
+    
+    func updateStages() {
+        currentStage.gameStageContainer = self
+        currentStage.nextState!.gameStageContainer = self
+    }
+    
+    func moveToNextStage() {
+        if let nextStage = currentStage.nextStage(), nextStage.isAccomplished() {
+            currentStage = nextStage
+            currentStageAccomplished = false
+        }
+    }
+}
+
+struct GameStageContainerView: View {
+    
+    @EnvironmentObject var gameStageContainer: GameStageContainer
+
+        var body: some View {
+            Group {
+                let _ = print("Stage \(gameStageContainer.currentStage.name) used for getView()")
+                gameStageContainer.currentStage.getView()
+            }
+            .onChange(of: gameStageContainer.currentStageAccomplished) { accomplished in
+                let _ = print("onChange triggered. Accomplished: \(accomplished)")
+                
+                if accomplished {
+                    gameStageContainer.moveToNextStage()
+                }
+            }
+        }
 }

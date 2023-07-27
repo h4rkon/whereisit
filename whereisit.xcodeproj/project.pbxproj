@@ -21,6 +21,7 @@
 		F1C2A4332A729DA1008EBB33 /* SecondStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4322A729DA1008EBB33 /* SecondStageView.swift */; };
 		F1C2A4352A729DBA008EBB33 /* SecondStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4342A729DBA008EBB33 /* SecondStage.swift */; };
 		F1C2A4372A72A30B008EBB33 /* DerBall.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */; };
+		F1C2A4392A72C58E008EBB33 /* AnyGameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		F1C2A4322A729DA1008EBB33 /* SecondStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStageView.swift; sourceTree = "<group>"; };
 		F1C2A4342A729DBA008EBB33 /* SecondStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStage.swift; sourceTree = "<group>"; };
 		F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = DerBall.m4a; sourceTree = "<group>"; };
+		F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGameStage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			children = (
 				F1C2A4102A6F9909008EBB33 /* Assets.xcassets */,
 				F1C2A4202A6F9985008EBB33 /* audio */,
+				F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */,
 				F1C2A4232A6F99BF008EBB33 /* ConfettiView.swift */,
 				F1C2A4242A6F99BF008EBB33 /* FirstStage.swift */,
 				F1C2A4222A6F99BF008EBB33 /* FirstStageView.swift */,
@@ -199,6 +202,7 @@
 				F1C2A4252A6F99BF008EBB33 /* FirstStageView.swift in Sources */,
 				F1C2A40D2A6F9908008EBB33 /* WhereIsItApp.swift in Sources */,
 				F1C2A4352A729DBA008EBB33 /* SecondStage.swift in Sources */,
+				F1C2A4392A72C58E008EBB33 /* AnyGameStage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

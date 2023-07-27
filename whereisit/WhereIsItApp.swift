@@ -16,10 +16,14 @@
 import SwiftUI
 
 @main
-struct whereisitApp: App {
+struct WhereIsItApp: App {
+    
+    @StateObject private var gameStageContainer = GameStageContainer()
+
     var body: some Scene {
+        let _ = gameStageContainer.updateStages()
         WindowGroup {
-            GameStageContainerView()
+            GameStageContainerView().environmentObject(gameStageContainer)
         }
     }
 }
