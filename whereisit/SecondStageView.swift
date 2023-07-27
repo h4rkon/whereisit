@@ -17,7 +17,7 @@ import SwiftUI
 
 struct SecondStageView: View {
     @EnvironmentObject var gameState: SecondStage
-    @State private var dogImage = UIImage(named: "dog")
+    @State private var ballImage = UIImage(named: "ball")
     @State private var frameImage = UIImage(named: "frame")
     @State private var showConfetti: Bool = false
 
@@ -27,7 +27,7 @@ struct SecondStageView: View {
                 gameState.playSounds()
             }
             
-            if let dogImage = dogImage,
+            if let ballImage = ballImage,
                let frameImage = frameImage {
                 
                 GeometryReader { geometry in
@@ -42,7 +42,7 @@ struct SecondStageView: View {
                     .frame(width: FirstStage.frameSize, height: FirstStage.frameSize)
                     .position(gameState.framePosition)
                 
-                Image(uiImage: dogImage)
+                Image(uiImage: ballImage)
                     .resizable()
                     .frame(width: FirstStage.dogSize, height: FirstStage.dogSize)
                     .position(gameState.ballPosition)

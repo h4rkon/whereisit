@@ -20,6 +20,7 @@
 		F1C2A4312A729AF5008EBB33 /* GameStageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4302A729AF5008EBB33 /* GameStageContainerView.swift */; };
 		F1C2A4332A729DA1008EBB33 /* SecondStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4322A729DA1008EBB33 /* SecondStageView.swift */; };
 		F1C2A4352A729DBA008EBB33 /* SecondStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4342A729DBA008EBB33 /* SecondStage.swift */; };
+		F1C2A4372A72A30B008EBB33 /* DerBall.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,7 @@
 				F1C2A4142A6F9909008EBB33 /* Preview Assets.xcassets in Resources */,
 				F1C2A41F2A6F9944008EBB33 /* DerHund.m4a in Resources */,
 				F1C2A4112A6F9909008EBB33 /* Assets.xcassets in Resources */,
+				F1C2A4372A72A30B008EBB33 /* DerBall.m4a in Resources */,
 				F1C2A41D2A6F9944008EBB33 /* Super.m4a in Resources */,
 				F1C2A42F2A6FA2C5008EBB33 /* .gitignore in Resources */,
 				F1C2A41E2A6F9944008EBB33 /* WoIst.m4a in Resources */,
