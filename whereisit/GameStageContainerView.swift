@@ -20,7 +20,7 @@ struct GameStageContainerView: View {
     @State private var currentStage: Int = 1
     
     var body: some View {
-        FirstStageView().environmentObject(FirstStage())
+        SecondStageView().environmentObject(SecondStage())
             .preferredColorScheme(.light)
     }
 }
