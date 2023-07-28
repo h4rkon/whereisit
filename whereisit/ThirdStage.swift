@@ -17,16 +17,20 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-class FirstStage: AnyGameStage {
+class ThirdStage: AnyGameStage {
     
     static let dogSize = CGFloat(200)
+    static let ballSize = CGFloat(200)
     static let frameSize = CGFloat(300)
     
 
-    @Published var dogPosition: CGPoint = .zero // The position of the dog image
-    @Published var originalDogPosition: CGPoint = .zero // The position of the dog image
-    @Published var framePosition: CGPoint = .zero // The position of the picture frame image
-    @Published var level: Int = 1
+    @Published var dogPosition: CGPoint = .zero
+    @Published var originalDogPosition: CGPoint = .zero
+    @Published var ballPosition: CGPoint = .zero
+    @Published var originalBallPosition: CGPoint = .zero
+    @Published var framePosition: CGPoint = .zero
+    
+    @Published var level: Int = 0
     @Published var winning: Bool = false
     
     @Published var audioPlayer: AVAudioPlayer?
@@ -36,6 +40,7 @@ class FirstStage: AnyGameStage {
         self.nextStage = nil
         updateFramePosition()
         generateRandomDogPosition()
+        generateRandomBallPosition()
     }
 
     func updateFramePosition() {
@@ -51,24 +56,30 @@ class FirstStage: AnyGameStage {
     }
     
     func generateRandomDogPosition() {
-        // Get the screen width and height
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
 
-        // Randomly generate x and y positions for the dog within the screen boundaries
-        var randomDogX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - FirstStage.dogSize))
-        var randomDogY = CGFloat.random(in: 0...(screenHeight - FirstStage.dogSize))
+        let randomDogX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - ThirdStage.dogSize))
+        let randomDogY = CGFloat.random(in: 0...(screenHeight - ThirdStage.dogSize))
 
-        // Check if the randomly generated position overlaps with the frame
-        while CGRect(x: randomDogX, y: randomDogY, width: FirstStage.dogSize, height: FirstStage.dogSize).intersects(CGRect(origin: framePosition, size: CGSize(width: FirstStage.frameSize, height: FirstStage.frameSize))) {
-            // If it overlaps, generate new random positions until a valid position is found
-            randomDogX = CGFloat.random(in: 0...(screenWidth - FirstStage.dogSize))
-            randomDogY = CGFloat.random(in: 0...(screenHeight - FirstStage.dogSize))
-        }
-
-        // Set the dog position to the valid random position
         dogPosition = CGPoint(x: randomDogX, y: randomDogY)
         originalDogPosition = CGPoint(x: randomDogX, y: randomDogY)
+    }
+    
+    func generateRandomBallPosition() {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+
+        var randomBallX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - ThirdStage.ballSize))
+        var randomBallY = CGFloat.random(in: 0...(screenHeight - ThirdStage.ballSize))
+
+        while CGRect(x: randomBallX, y: randomBallY, width: ThirdStage.ballSize, height: ThirdStage.ballSize).intersects(CGRect(origin: dogPosition, size: CGSize(width: ThirdStage.dogSize, height: ThirdStage.dogSize))) {
+            randomBallX = CGFloat.random(in: (screenWidth * 0.3)...(screenWidth - ThirdStage.ballSize))
+            randomBallY = CGFloat.random(in: 0...(screenHeight - ThirdStage.ballSize))
+        }
+
+        ballPosition = CGPoint(x: randomBallX, y: randomBallY)
+        originalBallPosition = CGPoint(x: randomBallX, y: randomBallY)
     }
     
     func setWinning() {
@@ -80,8 +91,8 @@ class FirstStage: AnyGameStage {
     }
     
     override func checkWinningCondition(movedObjectFinalPosition: CGPoint) -> Bool {
-        let dogSize: CGFloat = FirstStage.dogSize
-        let frameSize: CGFloat = FirstStage.frameSize
+        let dogSize: CGFloat = ThirdStage.dogSize
+        let frameSize: CGFloat = ThirdStage.frameSize
         let frameTopLeft = framePosition
         
         let dogCenter = CGPoint(x: movedObjectFinalPosition.x + dogSize/2, y: movedObjectFinalPosition.y + dogSize/2)
@@ -92,13 +103,16 @@ class FirstStage: AnyGameStage {
     
     override func resetGameState() {
         dogPosition = CGPoint(x: originalDogPosition.x, y: originalDogPosition.y)
+        ballPosition = CGPoint(x: originalBallPosition.x, y: originalBallPosition.y)
         playSounds()
     }
     
     func nextLevel() {
         level += 1
         generateRandomDogPosition()
+        generateRandomBallPosition()
         winning = false
+        let _ = print("Success number \(level)")
         if (level >= 3) {
             let _ = print("Stage \(self.name) was called accomplished=true")
             setAccomplished(accomplished: true)
@@ -138,6 +152,6 @@ class FirstStage: AnyGameStage {
     }
     
     override func getView() -> AnyView {
-        AnyView(FirstStageView(gameState: self as FirstStage))
+        AnyView(ThirdStageView(gameState: self as ThirdStage))
     }
 }

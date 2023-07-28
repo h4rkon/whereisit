@@ -20,7 +20,7 @@ import SwiftUI
 class AnyGameStage: ObservableObject {
     
     var name: String
-    var nextState: (AnyGameStage)?
+    var nextStage: (AnyGameStage)?
     var gameStageContainer: GameStageContainer?
     
     init(name: String){
@@ -45,7 +45,7 @@ class AnyGameStage: ObservableObject {
         return self.gameStageContainer!.currentStageAccomplished
     }
     
-    func nextStage() -> (AnyGameStage)? {
+    func getNextStage() -> (AnyGameStage)? {
         fatalError("Subclasses must override nextStage")
     }
     

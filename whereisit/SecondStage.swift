@@ -31,9 +31,9 @@ class SecondStage: AnyGameStage {
     
     @Published var audioPlayer: AVAudioPlayer?
 
-    init(name: String, nextState: (AnyGameStage)?) {
+    override init(name: String) {
         super.init(name: name)
-        self.nextState = nextState
+        self.nextStage = nil
         updateFramePosition()
         generateRandomBallPosition()
     }
@@ -122,10 +122,10 @@ class SecondStage: AnyGameStage {
         }
     }
     
-    override func nextStage() -> (AnyGameStage)? {
+    override func getNextStage() -> (AnyGameStage)? {
         if (isAccomplished()) {
             level = 1
-            return nextState
+            return nextStage
         }
         return nil
     }

@@ -20,21 +20,41 @@ class GameStageContainer: ObservableObject {
     @Published var currentStage: AnyGameStage
     @Published var currentStageAccomplished: Bool
     
+    var gameStages: [AnyGameStage] = []
+    
     init() {
-        let secondStage = SecondStage(name: "Second", nextState: nil)
-        let firstStage = FirstStage(name: "First", nextState: secondStage)
-        secondStage.nextState = firstStage
+        
+        let firstStage = FirstStage(name: "First")
+        gameStages.append(firstStage)
+        let secondStage = SecondStage(name: "Second")
+        gameStages.append(secondStage)
+        let thirdStage = ThirdStage(name: "Third")
+        gameStages.append(thirdStage)
+        
         currentStage = firstStage
         currentStageAccomplished = false
     }
     
     func updateStages() {
         currentStage.gameStageContainer = self
-        currentStage.nextState!.gameStageContainer = self
+        //currentStage.nextState!.gameStageContainer = self
+        
+        for index in gameStages.indices {
+            let gameStage = gameStages[index]
+            gameStage.gameStageContainer = self
+            let nextStageIndex = index + 1
+            
+            if (index < gameStages.indices.endIndex - 1) {
+                let nextIndex = gameStages.index(after: index)
+                gameStage.nextStage = gameStages[nextIndex]
+            } else {
+                gameStage.nextStage = gameStages.first
+            }
+        }
     }
     
     func moveToNextStage() {
-        if let nextStage = currentStage.nextStage(), nextStage.isAccomplished() {
+        if let nextStage = currentStage.getNextStage(), nextStage.isAccomplished() {
             currentStage = nextStage
             currentStageAccomplished = false
         }
