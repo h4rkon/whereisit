@@ -26,7 +26,7 @@ class SecondStage: AnyGameStage {
     @Published var ballPosition: CGPoint = .zero // The position of the dog image
     @Published var originalBallPosition: CGPoint = .zero // The position of the ball image
     @Published var framePosition: CGPoint = .zero // The position of the picture frame image
-    @Published var level: Int = 1
+    @Published var level: Int = 0
     @Published var winning: Bool = false
     
     @Published var audioPlayer: AVAudioPlayer?

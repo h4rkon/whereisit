@@ -41,9 +41,7 @@ class GameStageContainer: ObservableObject {
         
         for index in gameStages.indices {
             let gameStage = gameStages[index]
-            gameStage.gameStageContainer = self
-            let nextStageIndex = index + 1
-            
+            gameStage.gameStageContainer = self            
             if (index < gameStages.indices.endIndex - 1) {
                 let nextIndex = gameStages.index(after: index)
                 gameStage.nextStage = gameStages[nextIndex]

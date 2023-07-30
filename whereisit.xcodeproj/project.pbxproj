@@ -24,6 +24,7 @@
 		F1C2A4392A72C58E008EBB33 /* AnyGameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */; };
 		F1C2A43B2A73910A008EBB33 /* ThirdStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */; };
 		F1C2A43D2A739145008EBB33 /* ThirdStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43C2A739145008EBB33 /* ThirdStage.swift */; };
+		F1C2A43F2A7446E5008EBB33 /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGameStage.swift; sourceTree = "<group>"; };
 		F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStageView.swift; sourceTree = "<group>"; };
 		F1C2A43C2A739145008EBB33 /* ThirdStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStage.swift; sourceTree = "<group>"; };
+		F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				F1C2A43C2A739145008EBB33 /* ThirdStage.swift */,
 				F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */,
 				F1C2A40C2A6F9908008EBB33 /* WhereIsItApp.swift */,
+				F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */,
 			);
 			path = whereisit;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				F1C2A43B2A73910A008EBB33 /* ThirdStageView.swift in Sources */,
 				F1C2A4262A6F99BF008EBB33 /* ConfettiView.swift in Sources */,
 				F1C2A4332A729DA1008EBB33 /* SecondStageView.swift in Sources */,
+				F1C2A43F2A7446E5008EBB33 /* ImageListView.swift in Sources */,
 				F1C2A4272A6F99BF008EBB33 /* FirstStage.swift in Sources */,
 				F1C2A4312A729AF5008EBB33 /* GameStageContainerView.swift in Sources */,
 				F1C2A4252A6F99BF008EBB33 /* FirstStageView.swift in Sources */,
