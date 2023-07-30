@@ -102,8 +102,8 @@ class SecondStage: AnyGameStage {
     }
     
     func playSounds() {
-        if let soundURL1 = Bundle.main.url(forResource: "WoIst", withExtension: "m4a"),
-           let soundURL2 = Bundle.main.url(forResource: "DerBall", withExtension: "m4a") {
+        if let soundURL1 = Bundle.main.url(forResource: "whereis", withExtension: "m4a"),
+           let soundURL2 = Bundle.main.url(forResource: "ball", withExtension: "m4a") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL1)
                 audioPlayer?.play()
