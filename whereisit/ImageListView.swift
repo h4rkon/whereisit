@@ -15,90 +15,62 @@
 
 
 import SwiftUI
+import AVFoundation
 
-struct ImageModel: Identifiable {
+class ImageModelOld: Identifiable {
     let id = UUID()
     let imageName: String
-}
-
-struct CustomRectangle : View{
-    var column: Int
-    var row: Int
-    var position: CGPoint
-    var size: CGSize
+    let introSound: String
+    let objectSound: String
     
-    init(column: Int, row: Int) {
-        self.column = column
-        self.row = row
-        self.position = CustomRectangle.definePosition(column: column, row: row)
-        self.size = CGSize(width: 200, height: 200)
+    init(imageName: String, introSound: String, objectSound: String) {
+        self.imageName = imageName
+        self.introSound = introSound
+        self.objectSound = objectSound
     }
     
-    static func definePosition(column: Int, row: Int) -> CGPoint {
-        let columnOffset = column * 2 + 3
-        let x = Int(Int(UIScreen.main.bounds.width) * columnOffset / 8)
-        let rowOffset = row * 2 + 1
-        let y = Int(Int(UIScreen.main.bounds.height) * rowOffset / 4)
-        return CGPoint(x: x, y: y)
-    }
+    @Published var position: CGPoint = .zero
     
-    var body: some View {
-        Rectangle()
-            .frame(width: size.width, height: size.height)
-            .position(position)
-    }
-}
-
-struct ImageListView : View {
+    var player1: AVAudioPlayer?
+    var player2: AVAudioPlayer?
     
-    let columns = [0, 1, 2]
-    let rows = [0, 1]
-    
-    let framePosition: CGPoint
-    let frameSize: CGSize
-    let frameRect: CGRect
-    
-    init() {
-        framePosition = CGPoint(x: UIScreen.main.bounds.width / 8, y: UIScreen.main.bounds.height / 2)
-        frameSize = CGSize(width: 300, height: 300)
-        frameRect = CGRect(x: framePosition.x - 150, y: framePosition.y - 150, width: 300, height: 300)
-    }
-    
-    var body: some View {
-        ZStack {
-            
-        
-            Rectangle()
-                .foregroundColor(Color.gray)
-                .overlay(
-                    Image("frame")
-                        .resizable()
-                )
-                .frame(width: 300, height: 300)
-                .position(framePosition)
+    func playSounds(){
+        if let soundURL1 = Bundle.main.url(forResource: introSound, withExtension: "m4a"),
+           let soundURL2 = Bundle.main.url(forResource: objectSound, withExtension: "m4a") {
+            do {
+                player1 = try AVAudioPlayer(contentsOf: soundURL1)
+                player1!.prepareToPlay()
                 
-            ForEach(rows, id: \.self) { row in
-                ForEach(columns, id: \.self) { column in
-                    CustomRectangle(column: column, row: row)
+                player2 = try AVAudioPlayer(contentsOf: soundURL2)
+                player2!.prepareToPlay()
+                
+                player1!.play()
+                
+                let duration = player1!.duration
+                let playerForClosure = player2
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    playerForClosure!.play()
                 }
+                
+            } catch {
+                print("Error playing sound: \(error.localizedDescription)")
             }
         }
     }
 }
 
-struct ImageListView2: View {
-    
-    
-    @State private var textInput: String = ""
+struct ImageListViewOld: View {
 
-    @State private var images: [ImageModel] = [
-        ImageModel(imageName: "clear"),
-        ImageModel(imageName: "dog"),
-        ImageModel(imageName: "ball"),
-        ImageModel(imageName: "nose"),
-        ImageModel(imageName: "car"),
-        ImageModel(imageName: "feet"),
-        ImageModel(imageName: "cat"),
+    @State private var images: [ImageModelOld] = [
+        ImageModelOld(imageName: "clear", introSound: "", objectSound: ""),
+        ImageModelOld(imageName: "dog", introSound: "whereis", objectSound: "dog"),
+        ImageModelOld(imageName: "ball", introSound: "whereis", objectSound: "ball"),
+        ImageModelOld(imageName: "nose", introSound: "whereis", objectSound: "nose"),
+        ImageModelOld(imageName: "car", introSound: "whereis", objectSound: "car"),
+        ImageModelOld(imageName: "feet", introSound: "whereis", objectSound: "feet"),
+        ImageModelOld(imageName: "cat", introSound: "whereis", objectSound: "cat"),
     ]
     
     @State private var isImagePickerPresented00 = false
@@ -108,14 +80,18 @@ struct ImageListView2: View {
     @State private var isImagePickerPresented11 = false
     @State private var isImagePickerPresented12 = false
     
-    @State private var selectedImage00: ImageModel?
-    @State private var selectedImage01: ImageModel?
-    @State private var selectedImage02: ImageModel?
-    @State private var selectedImage10: ImageModel?
-    @State private var selectedImage11: ImageModel?
-    @State private var selectedImage12: ImageModel?
+    @State private var selectedImage00: ImageModelOld?
+    @State private var selectedImage01: ImageModelOld?
+    @State private var selectedImage02: ImageModelOld?
+    @State private var selectedImage10: ImageModelOld?
+    @State private var selectedImage11: ImageModelOld?
+    @State private var selectedImage12: ImageModelOld?
     
     @State var targetObject: Int = 0
+    
+    @State private var tapCount: Int = 0
+    
+    @State var game: Bool = false
     
     let framePosition: CGPoint
     let frameSize: CGSize
@@ -131,16 +107,14 @@ struct ImageListView2: View {
         
         VStack {
             
+            //Image("play")
+            //    .resizable()
+            //    .frame(width: 133, height: 100)
+            
             HStack(alignment: .center) {
         
                 ZStack {
                     GeometryReader { reader in
-                        
-                        TextField("Level Name", text: $textInput)
-                            .frame(width: 300)
-                            .position(x: reader.size.width/2)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
                         
                         Rectangle()
                             .foregroundColor(Color.gray)
@@ -150,29 +124,40 @@ struct ImageListView2: View {
                             )
                             .frame(width: 300, height: 300)
                             .position(framePosition)
+                            .onTapGesture(count: 2) {
+                                tapCount += 1
+                                let test = (tapCount - 1 ) % 4
+                                if (test != 0) {
+                                    game = true
+                                } else {
+                                    game = false
+                                }
+                            }
                         
                         
                         Rectangle()
-                            .foregroundColor(selectedImage00 != nil ? .clear : .gray)
+                            .foregroundColor( (selectedImage00 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage00 != nil ? Image(selectedImage00!.imageName).resizable() : nil)
-                            .overlay(targetObject == 1 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 1 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 3 / 8, y: reader.size.height / 4)
                             .onTapGesture {
                                 isImagePickerPresented00 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented00) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage00, isPresented: $isImagePickerPresented00)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage00, isPresented: $isImagePickerPresented00)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
                                     if (selectedImage00 != nil) {
+                                        
                                     }
                                 }
                                 .onEnded { value in
                                     if (selectedImage00 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 1
+                                            selectedImage00?.playSounds()
                                         }
                                         else if (targetObject > 0) {
                                             targetObject = 0
@@ -182,16 +167,16 @@ struct ImageListView2: View {
                             )
                         
                         Rectangle()
-                            .foregroundColor(selectedImage01 != nil ? .clear : .gray)
+                            .foregroundColor(( selectedImage01 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage01 != nil ? Image(selectedImage01!.imageName).resizable() : nil)
-                            .overlay(targetObject == 2 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 2 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 5 / 8, y: reader.size.height / 4)
                             .onTapGesture {
                                 isImagePickerPresented01 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented01) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage01, isPresented: $isImagePickerPresented01)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage01, isPresented: $isImagePickerPresented01)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
@@ -202,6 +187,7 @@ struct ImageListView2: View {
                                     if (selectedImage01 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 2
+                                            selectedImage01?.playSounds()
                                         }
                                         else if (targetObject > 0) {
                                             targetObject = 0
@@ -211,16 +197,16 @@ struct ImageListView2: View {
                             )
                         
                         Rectangle()
-                            .foregroundColor(selectedImage02 != nil ? .clear : .gray)
+                            .foregroundColor(( selectedImage02 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage02 != nil ? Image(selectedImage02!.imageName).resizable() : nil)
-                            .overlay(targetObject == 3 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 3 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 7 / 8, y: reader.size.height / 4)
                             .onTapGesture {
                                 isImagePickerPresented02 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented02) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage02, isPresented: $isImagePickerPresented02)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage02, isPresented: $isImagePickerPresented02)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
@@ -231,6 +217,7 @@ struct ImageListView2: View {
                                     if (selectedImage02 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 3
+                                            selectedImage02?.playSounds()
                                         }
                                         else if (targetObject > 0) {
                                             targetObject = 0
@@ -240,16 +227,16 @@ struct ImageListView2: View {
                             )
                         
                         Rectangle()
-                            .foregroundColor(selectedImage10 != nil ? .clear : .gray)
+                            .foregroundColor((selectedImage10 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage10 != nil ? Image(selectedImage10!.imageName).resizable() : nil)
-                            .overlay(targetObject == 4 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 4 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 3 / 8, y: reader.size.height * 3 / 4)
                             .onTapGesture {
                                 isImagePickerPresented10 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented10) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage10, isPresented: $isImagePickerPresented10)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage10, isPresented: $isImagePickerPresented10)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
@@ -260,6 +247,7 @@ struct ImageListView2: View {
                                     if (selectedImage10 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 4
+                                            selectedImage10?.playSounds()
                                         }
                                         else if (targetObject > 0) {
                                             targetObject = 0
@@ -269,16 +257,16 @@ struct ImageListView2: View {
                             )
                         
                         Rectangle()
-                            .foregroundColor(selectedImage11 != nil ? .clear : .gray)
+                            .foregroundColor((selectedImage11 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage11 != nil ? Image(selectedImage11!.imageName).resizable() : nil)
-                            .overlay(targetObject == 5 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 5 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 5 / 8, y: reader.size.height * 3 / 4)
                             .onTapGesture {
                                 isImagePickerPresented11 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented11) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage11, isPresented: $isImagePickerPresented11)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage11, isPresented: $isImagePickerPresented11)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
@@ -289,6 +277,7 @@ struct ImageListView2: View {
                                     if (selectedImage11 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 5
+                                            selectedImage11?.playSounds()
                                         }
                                     }
                                     else if (targetObject > 0) {
@@ -298,26 +287,28 @@ struct ImageListView2: View {
                             )
                         
                         Rectangle()
-                            .foregroundColor(selectedImage12 != nil ? .clear : .gray)
+                            .foregroundColor((selectedImage12 != nil || game) ? .clear : .gray)
                             .overlay(selectedImage12 != nil ? Image(selectedImage12!.imageName).resizable() : nil)
-                            .overlay(targetObject == 6 ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
+                            .overlay(( targetObject == 6 && !game) ? Rectangle().stroke(Color.red, lineWidth: 2): nil)
                             .frame(width: 200, height: 200)
                             .position(x: reader.size.width * 7 / 8, y: reader.size.height * 3 / 4)
                             .onTapGesture {
                                 isImagePickerPresented12 = true
                             }
                             .sheet(isPresented: $isImagePickerPresented12) {
-                                ImagePicker(images: $images, selectedImage: $selectedImage12, isPresented: $isImagePickerPresented12)
+                                // ImagePicker(images: $images, selectedImage: $selectedImage12, isPresented: $isImagePickerPresented12)
                             }
                             .gesture(DragGesture(coordinateSpace: .global)
                                 .onChanged{value in
                                     if (selectedImage12 != nil) {
+                                        
                                     }
                                 }
                                 .onEnded { value in
                                     if (selectedImage12 != nil) {
                                         if (frameRect.contains(value.location)) {
                                             targetObject = 6
+                                            selectedImage12?.playSounds()
                                         }
                                     }
                                     else if (targetObject > 0) {
@@ -326,22 +317,15 @@ struct ImageListView2: View {
                                 }
                             )
                         }
-                    VStack {
-                        Spacer() // Push the "Speichern" button to the bottom
-                        Button("Speichern") {
-                            let _ = print("Speichern")
-                        }
-                        .frame(width: 300)
-                    }
                 }
             }
         }
     }
 }
 
-struct ImagePicker: View {
-    @Binding var images: [ImageModel]
-    @Binding var selectedImage: ImageModel?
+struct ImagePickerOld: View {
+    @Binding var images: [ImageModelOld]
+    @Binding var selectedImage: ImageModelOld?
     @Binding var isPresented: Bool
 
     var body: some View {
