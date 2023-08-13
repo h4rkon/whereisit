@@ -26,7 +26,7 @@ class FirstStage: AnyGameStage {
     @Published var dogPosition: CGPoint = .zero // The position of the dog image
     @Published var originalDogPosition: CGPoint = .zero // The position of the dog image
     @Published var framePosition: CGPoint = .zero // The position of the picture frame image
-    @Published var level: Int = 1
+    @Published var level: Int = 0
     @Published var winning: Bool = false
     
     @Published var audioPlayer: AVAudioPlayer?
@@ -109,8 +109,8 @@ class FirstStage: AnyGameStage {
     }
     
     func playSounds() {
-        if let soundURL1 = Bundle.main.url(forResource: "WoIst", withExtension: "m4a"),
-           let soundURL2 = Bundle.main.url(forResource: "DerHund", withExtension: "m4a") {
+        if let soundURL1 = Bundle.main.url(forResource: "whereis", withExtension: "m4a"),
+           let soundURL2 = Bundle.main.url(forResource: "dog", withExtension: "m4a") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL1)
                 audioPlayer?.play()

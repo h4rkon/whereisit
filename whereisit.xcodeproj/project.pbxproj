@@ -10,9 +10,9 @@
 		F1C2A40D2A6F9908008EBB33 /* WhereIsItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A40C2A6F9908008EBB33 /* WhereIsItApp.swift */; };
 		F1C2A4112A6F9909008EBB33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4102A6F9909008EBB33 /* Assets.xcassets */; };
 		F1C2A4142A6F9909008EBB33 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4132A6F9909008EBB33 /* Preview Assets.xcassets */; };
-		F1C2A41D2A6F9944008EBB33 /* Super.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41A2A6F9944008EBB33 /* Super.m4a */; };
-		F1C2A41E2A6F9944008EBB33 /* WoIst.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41B2A6F9944008EBB33 /* WoIst.m4a */; };
-		F1C2A41F2A6F9944008EBB33 /* DerHund.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41C2A6F9944008EBB33 /* DerHund.m4a */; };
+		F1C2A41D2A6F9944008EBB33 /* super.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41A2A6F9944008EBB33 /* super.m4a */; };
+		F1C2A41E2A6F9944008EBB33 /* whereis.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41B2A6F9944008EBB33 /* whereis.m4a */; };
+		F1C2A41F2A6F9944008EBB33 /* dog.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A41C2A6F9944008EBB33 /* dog.m4a */; };
 		F1C2A4252A6F99BF008EBB33 /* FirstStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4222A6F99BF008EBB33 /* FirstStageView.swift */; };
 		F1C2A4262A6F99BF008EBB33 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4232A6F99BF008EBB33 /* ConfettiView.swift */; };
 		F1C2A4272A6F99BF008EBB33 /* FirstStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4242A6F99BF008EBB33 /* FirstStage.swift */; };
@@ -20,10 +20,16 @@
 		F1C2A4312A729AF5008EBB33 /* GameStageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4302A729AF5008EBB33 /* GameStageContainerView.swift */; };
 		F1C2A4332A729DA1008EBB33 /* SecondStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4322A729DA1008EBB33 /* SecondStageView.swift */; };
 		F1C2A4352A729DBA008EBB33 /* SecondStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4342A729DBA008EBB33 /* SecondStage.swift */; };
-		F1C2A4372A72A30B008EBB33 /* DerBall.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */; };
+		F1C2A4372A72A30B008EBB33 /* ball.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1C2A4362A72A0FA008EBB33 /* ball.m4a */; };
 		F1C2A4392A72C58E008EBB33 /* AnyGameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */; };
 		F1C2A43B2A73910A008EBB33 /* ThirdStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */; };
 		F1C2A43D2A739145008EBB33 /* ThirdStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43C2A739145008EBB33 /* ThirdStage.swift */; };
+		F1C2A43F2A7446E5008EBB33 /* ImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */; };
+		F1FD67EA2A87E605001A54F5 /* feet.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1FD67E62A87E605001A54F5 /* feet.m4a */; };
+		F1FD67EB2A87E605001A54F5 /* nose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1FD67E72A87E605001A54F5 /* nose.m4a */; };
+		F1FD67EC2A87E605001A54F5 /* car.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1FD67E82A87E605001A54F5 /* car.m4a */; };
+		F1FD67ED2A87E605001A54F5 /* cat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F1FD67E92A87E605001A54F5 /* cat.m4a */; };
+		F1FD67EF2A88CD06001A54F5 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FD67EE2A88CD06001A54F5 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +37,9 @@
 		F1C2A40C2A6F9908008EBB33 /* WhereIsItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereIsItApp.swift; sourceTree = "<group>"; };
 		F1C2A4102A6F9909008EBB33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1C2A4132A6F9909008EBB33 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F1C2A41A2A6F9944008EBB33 /* Super.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Super.m4a; sourceTree = "<group>"; };
-		F1C2A41B2A6F9944008EBB33 /* WoIst.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = WoIst.m4a; sourceTree = "<group>"; };
-		F1C2A41C2A6F9944008EBB33 /* DerHund.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = DerHund.m4a; sourceTree = "<group>"; };
+		F1C2A41A2A6F9944008EBB33 /* super.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = super.m4a; sourceTree = "<group>"; };
+		F1C2A41B2A6F9944008EBB33 /* whereis.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = whereis.m4a; sourceTree = "<group>"; };
+		F1C2A41C2A6F9944008EBB33 /* dog.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = dog.m4a; sourceTree = "<group>"; };
 		F1C2A4222A6F99BF008EBB33 /* FirstStageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStageView.swift; sourceTree = "<group>"; };
 		F1C2A4232A6F99BF008EBB33 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		F1C2A4242A6F99BF008EBB33 /* FirstStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstStage.swift; sourceTree = "<group>"; };
@@ -43,10 +49,16 @@
 		F1C2A4302A729AF5008EBB33 /* GameStageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStageContainerView.swift; sourceTree = "<group>"; };
 		F1C2A4322A729DA1008EBB33 /* SecondStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStageView.swift; sourceTree = "<group>"; };
 		F1C2A4342A729DBA008EBB33 /* SecondStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStage.swift; sourceTree = "<group>"; };
-		F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = DerBall.m4a; sourceTree = "<group>"; };
+		F1C2A4362A72A0FA008EBB33 /* ball.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball.m4a; sourceTree = "<group>"; };
 		F1C2A4382A72C58E008EBB33 /* AnyGameStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGameStage.swift; sourceTree = "<group>"; };
 		F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStageView.swift; sourceTree = "<group>"; };
 		F1C2A43C2A739145008EBB33 /* ThirdStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStage.swift; sourceTree = "<group>"; };
+		F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListView.swift; sourceTree = "<group>"; };
+		F1FD67E62A87E605001A54F5 /* feet.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = feet.m4a; sourceTree = "<group>"; };
+		F1FD67E72A87E605001A54F5 /* nose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = nose.m4a; sourceTree = "<group>"; };
+		F1FD67E82A87E605001A54F5 /* car.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = car.m4a; sourceTree = "<group>"; };
+		F1FD67E92A87E605001A54F5 /* cat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = cat.m4a; sourceTree = "<group>"; };
+		F1FD67EE2A88CD06001A54F5 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +107,8 @@
 				F1C2A43C2A739145008EBB33 /* ThirdStage.swift */,
 				F1C2A43A2A73910A008EBB33 /* ThirdStageView.swift */,
 				F1C2A40C2A6F9908008EBB33 /* WhereIsItApp.swift */,
+				F1C2A43E2A7446E5008EBB33 /* ImageListView.swift */,
+				F1FD67EE2A88CD06001A54F5 /* GameView.swift */,
 			);
 			path = whereisit;
 			sourceTree = "<group>";
@@ -118,10 +132,14 @@
 		F1C2A4212A6F998E008EBB33 /* de */ = {
 			isa = PBXGroup;
 			children = (
-				F1C2A4362A72A0FA008EBB33 /* DerBall.m4a */,
-				F1C2A41C2A6F9944008EBB33 /* DerHund.m4a */,
-				F1C2A41A2A6F9944008EBB33 /* Super.m4a */,
-				F1C2A41B2A6F9944008EBB33 /* WoIst.m4a */,
+				F1FD67E82A87E605001A54F5 /* car.m4a */,
+				F1FD67E62A87E605001A54F5 /* feet.m4a */,
+				F1FD67E92A87E605001A54F5 /* cat.m4a */,
+				F1FD67E72A87E605001A54F5 /* nose.m4a */,
+				F1C2A4362A72A0FA008EBB33 /* ball.m4a */,
+				F1C2A41C2A6F9944008EBB33 /* dog.m4a */,
+				F1C2A41A2A6F9944008EBB33 /* super.m4a */,
+				F1C2A41B2A6F9944008EBB33 /* whereis.m4a */,
 			);
 			path = de;
 			sourceTree = "<group>";
@@ -184,13 +202,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1FD67EA2A87E605001A54F5 /* feet.m4a in Resources */,
+				F1FD67ED2A87E605001A54F5 /* cat.m4a in Resources */,
 				F1C2A4142A6F9909008EBB33 /* Preview Assets.xcassets in Resources */,
-				F1C2A41F2A6F9944008EBB33 /* DerHund.m4a in Resources */,
+				F1C2A41F2A6F9944008EBB33 /* dog.m4a in Resources */,
 				F1C2A4112A6F9909008EBB33 /* Assets.xcassets in Resources */,
-				F1C2A4372A72A30B008EBB33 /* DerBall.m4a in Resources */,
-				F1C2A41D2A6F9944008EBB33 /* Super.m4a in Resources */,
+				F1C2A4372A72A30B008EBB33 /* ball.m4a in Resources */,
+				F1C2A41D2A6F9944008EBB33 /* super.m4a in Resources */,
 				F1C2A42F2A6FA2C5008EBB33 /* .gitignore in Resources */,
-				F1C2A41E2A6F9944008EBB33 /* WoIst.m4a in Resources */,
+				F1C2A41E2A6F9944008EBB33 /* whereis.m4a in Resources */,
+				F1FD67EB2A87E605001A54F5 /* nose.m4a in Resources */,
+				F1FD67EC2A87E605001A54F5 /* car.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,11 +227,13 @@
 				F1C2A43B2A73910A008EBB33 /* ThirdStageView.swift in Sources */,
 				F1C2A4262A6F99BF008EBB33 /* ConfettiView.swift in Sources */,
 				F1C2A4332A729DA1008EBB33 /* SecondStageView.swift in Sources */,
+				F1C2A43F2A7446E5008EBB33 /* ImageListView.swift in Sources */,
 				F1C2A4272A6F99BF008EBB33 /* FirstStage.swift in Sources */,
 				F1C2A4312A729AF5008EBB33 /* GameStageContainerView.swift in Sources */,
 				F1C2A4252A6F99BF008EBB33 /* FirstStageView.swift in Sources */,
 				F1C2A40D2A6F9908008EBB33 /* WhereIsItApp.swift in Sources */,
 				F1C2A4352A729DBA008EBB33 /* SecondStage.swift in Sources */,
+				F1FD67EF2A88CD06001A54F5 /* GameView.swift in Sources */,
 				F1C2A4392A72C58E008EBB33 /* AnyGameStage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

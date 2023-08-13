@@ -51,7 +51,7 @@ struct ConfettiView: View {
         
         for _ in 0..<1000 {
             let piece = ConfettiPiece(
-                x: 0,
+                x: UIScreen.main.bounds.width / 2,
                 y: -CGFloat.random(in: 0...(screenHeight / 2)),
                 color: Color.random,
                 gravity: CGFloat.random(in: 50...300)
@@ -62,7 +62,7 @@ struct ConfettiView: View {
     
     private func animateConfetti() {
         
-        if let soundURL = Bundle.main.url(forResource: "Super", withExtension: "m4a") {
+        if let soundURL = Bundle.main.url(forResource: "super", withExtension: "m4a") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.play()
@@ -74,7 +74,7 @@ struct ConfettiView: View {
         withAnimation(Animation.easeInOut(duration: 4)) {
             for index in 0..<confettiPieces.count {
                 var piece = confettiPieces[index]
-                piece.x = CGFloat.random(in: -1000...1000)
+                piece.x = CGFloat.random(in: UIScreen.main.bounds.minX...UIScreen.main.bounds.width)
                 piece.y = 0 // Start at the bottom of the screen
                 confettiPieces[index] = piece
             }
