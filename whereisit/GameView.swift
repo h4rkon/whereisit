@@ -31,28 +31,11 @@ class ImageModel: ObservableObject {
         self.imageName = imageName
         self.introSound = introSound
         self.objectSound = objectSound
-        
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-        if (id == 1) {
-            self.position = CGPoint(x: width * 3 / 8, y: height / 4)
-        }
-        else if(id == 2) {
-            self.position = CGPoint(x: width * 5 / 8, y: height / 4)
-        }
-        else if(id == 3) {
-            self.position = CGPoint(x: width * 7 / 8, y: height / 4)
-        }
-        else if(id == 4) {
-            self.position = CGPoint(x: width * 3 / 8, y: height * 3 / 4)
-        }
-        else if(id == 5) {
-            self.position = CGPoint(x: width * 5 / 8, y: height * 3 / 4)
-        }
-        else if(id == 6) {
-            self.position = CGPoint(x: width * 7 / 8, y: height * 3 / 4)
-        }
-        originalPosition = CGPoint(x: position.x, y: position.y)
+        changePosition()
+    }
+    
+    func clonePosition(position: CGPoint) -> CGPoint {
+        return CGPoint(x: position.x, y: position.y)
     }
     
     var player1: AVAudioPlayer?
@@ -87,6 +70,11 @@ class ImageModel: ObservableObject {
     func resetPosition() {
         position = CGPoint(x: originalPosition.x, y: originalPosition.y)
     }
+    
+    func changePosition() {
+        self.position = clonePosition(position: ImageListView.positions[self.id - 1])
+        originalPosition = clonePosition(position: self.position)
+    }
 }
 
 struct ImageListView: View {
@@ -97,6 +85,15 @@ struct ImageListView: View {
     @ObservedObject var image4 = ImageModel(id: 4, imageName: "car", introSound: "whereis", objectSound: "car")
     @ObservedObject var image5 = ImageModel(id: 5, imageName: "feet", introSound: "whereis", objectSound: "feet")
     @ObservedObject var image6 = ImageModel(id: 6, imageName: "cat", introSound: "whereis", objectSound: "cat")
+    
+    public static var positions: [CGPoint] = [
+        CGPoint(x: UIScreen.main.bounds.width * 3 / 8, y: UIScreen.main.bounds.height / 4),
+        CGPoint(x: UIScreen.main.bounds.width * 5 / 8, y: UIScreen.main.bounds.height / 4),
+        CGPoint(x: UIScreen.main.bounds.width * 7 / 8, y: UIScreen.main.bounds.height / 4),
+        CGPoint(x: UIScreen.main.bounds.width * 3 / 8, y: UIScreen.main.bounds.height * 3 / 4),
+        CGPoint(x: UIScreen.main.bounds.width * 5 / 8, y: UIScreen.main.bounds.height * 3 / 4),
+        CGPoint(x: UIScreen.main.bounds.width * 7 / 8, y: UIScreen.main.bounds.height * 3 / 4)
+    ]
     
     @State private var selectedImage1: Bool = true
     @State private var selectedImage2: Bool = true
@@ -137,6 +134,15 @@ struct ImageListView: View {
     func nextLevel() {
         winning = false
         successfull += 1
+        ImageListView.positions.shuffle()
+        
+        image1.changePosition()
+        image2.changePosition()
+        image3.changePosition()
+        image4.changePosition()
+        image5.changePosition()
+        image6.changePosition()
+        
         if( successfull == runs) {
             successfull = 0
             game = false
@@ -445,6 +451,7 @@ struct ImageListView: View {
                                         nextLevel()
                                         showConfetti = false
                                         targetImage!.resetPosition()
+                                        targetImage!.playSounds()
                                     }
                                 }
                                 .onDisappear {
