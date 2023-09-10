@@ -16,3 +16,5 @@ The game supports language development by continuous repetition of single words 
 ## 3rd version - planned
 * Game plan - 20 times first image, 20 times second image, 20 times two images and identify one (audio based)
 * Extension to have two images and the empty picture frame - differntiation which is correct and which one is wrong
+
+## Future states
